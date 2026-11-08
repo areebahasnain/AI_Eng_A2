@@ -1,0 +1,23 @@
+# Secrets - NEVER commit
+.env
+*.key
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Benchmark output (keep the folder, ignore the data unless you want to commit it)
+results/*.json
+!results/.gitkeep
+
+.DS_Store
+
+# Persistent API budget + cached model responses. MUST survive app restarts,
+# but should not be published or submitted.
+data/*.sqlite3
+data/*.sqlite3-*
+data/*.db
+data/*.db-*

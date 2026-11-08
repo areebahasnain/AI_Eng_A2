@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rubik's Cube Race</title>
+  <link rel="stylesheet" href="/static/style.css?v=__STYLE_HASH__">
+</head>
+<body>
+
+  <!-- Student identity: visible in every view for the entire demo -->
+  <header id="idbar">
+    <div class="id-left"><span class="logo">&#9638;</span> AI Engineering &middot; Assignment 02</div>
+    <div class="id-right" id="idbox"></div>
+  </header>
+  <div id="mockbanner" hidden>MOCK MODE &mdash; simulated models, NOT real results. Do not report these numbers.</div>
+  <div id="localbanner" hidden>OLLAMA LOCAL MODE &mdash; free local alternative models; results are NOT the four hosted OpenRouter models.</div>
+  <div id="budgetbar" class="budgetbar">OpenRouter budget is persistent across restarts.</div>
+  <div id="errbanner" hidden></div>
+
+  <main>
+    <section id="controls" class="panel">
+      <div class="ctl">
+        <label for="suite">Test set</label>
+        <select id="suite">
+          <option value="primary">Primary &middot; exactly 3 moves</option>
+          <option value="warmup">Warm-up &middot; exactly 3 moves</option>
+          <option value="extension">Extension &middot; exactly 3 moves</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label for="npz">Puzzles</label>
+        <input id="npz" type="number" min="1" max="50" value="1">
+      </div>
+      <div class="ctl">
+        <label for="seed">Seed</label>
+        <input id="seed" type="number" min="0" placeholder="random">
+      </div>
+      <div class="ctl"><label for="provider">Run mode</label>
+        <select id="provider">
+          <option value="mock">Mock (free simulation)</option>
+          <option value="ollama">Ollama (local models)</option>
+          <option value="openrouter">OpenRouter (limited real key)</option>
+        </select>
+      </div>
+      <div class="ctl chk"><label title="Race the four models at the same time on each puzzle"><input id="parallel" type="checkbox"> Parallel</label></div>
+      <div class="ctl chk" id="guidance-wrap" hidden><label title="UNFAIR as model benchmark: exact solver limits/overrides local model actions. Use only for integration demos."><input id="ollama-guided" type="checkbox"> Solver-guided demo (assisted)</label></div>
+      <details class="ctl models">
+        <summary>Models <span id="modelcount"></span></summary>
+        <div id="modellist"></div>
+      </details>
+      <div class="ctl grow"></div>
+      <div class="ctl btns">
+        <button id="run" class="primary">&#9654; Run benchmark</button>
+        <button id="stop" class="danger" hidden>&#9632; Stop</button>
+        <button id="replay" title="Replay the last finished run from its recorded timings">&#8635; Replay last run</button>
+      </div>
+      <div class="ctl chk"><label title="Open the statistics slide when a run finishes"><input id="autostats" type="checkbox" checked> Auto-open stats</label></div>
+    </section>
+
+    <nav class="tabs">
+      <button id="tab-race" class="tab active">Race</button>
+      <button id="tab-stats" class="tab">Benchmark statistics</button>
+      <span class="keynote" id="keynote"></span>
+    </nav>
+
+    <section id="view-race">
+      <div class="racehead">
+        <div class="rh-title">RUBIK'S CUBE RACE</div>
+        <div class="speedpill" id="speedpill" title="Playback speed (replay only)">LIVE</div>
+      </div>
+      <div id="puzzleinfo" class="puzzleinfo"></div>
+      <div id="grid" class="grid"></div>
+      <div id="puzzlebar" class="puzzlebar"></div>
+    </section>
+
+    <section id="view-stats" hidden></section>
+  </main>
+
+  <script src="/static/app.js?v=__APP_HASH__"></script>
+</body>
+</html>
